@@ -1,27 +1,15 @@
-from tkinter import Tk, BOTH, Canvas
+from graphics import Window
+from maze import Maze
 
-class Window:
-    def __init__(self, width, height):
-        self.__root = Tk()
-        self.__root.title("Maze Solver")
-        self.__root.geometry(f"{width}x{height}")
-        self.canvas = Canvas(self.__root)
-        self.canvas.pack()
-        self.running = False
-        self.__root.protocol("WM_DELETE_WINDOW", self.close)
-
-    def redraw(self):
-        self.__root.update_idletasks()
-        self.__root.update()
-
-    def wait_for_close(self):
-        self.running = True
-        while self.running == True:
-            self.redraw()
-        
-    def close(self):
-        self.running = False
 
 if __name__ == "__main__":
-    win = Window(800, 600)
-    win.wait_for_close()
+    window = Window(800, 600)
+    maze = Maze(
+            10,
+            10,
+            30,
+            20,
+            20,
+            20,
+            window)
+    window.wait_for_close()
