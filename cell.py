@@ -1,5 +1,7 @@
 from graphics import Point, Line
 
+background_colour = "#d9d9d9"
+
 class Cell:
     def __init__(self, p1, p2, window = None) -> None:
         self._topleft = Point(p1.x, p1.y)
@@ -12,17 +14,26 @@ class Cell:
         self.has_left_wall = True
         self.has_right_wall = True
         self.has_bottom_wall = True
+        self.visited = False
 
     
     def draw(self):
+        colour = background_colour
         if self.has_top_wall:
-            self._window.draw_line(Line(self._topleft, self._topright))
+            colour = "black"
+        self._window.draw_line(Line(self._topleft, self._topright), colour)
+        colour = background_colour
         if self.has_left_wall:
-            self._window.draw_line(Line(self._topleft, self._bottomleft))
+            colour = "black"
+        self._window.draw_line(Line(self._topleft, self._bottomleft), colour)
+        colour = background_colour
         if self.has_right_wall:
-            self._window.draw_line(Line(self._topright, self._bottomright))
+            colour = "black"
+        self._window.draw_line(Line(self._topright, self._bottomright), colour)
+        colour = background_colour
         if self.has_bottom_wall:
-            self._window.draw_line(Line(self._bottomleft, self._bottomright))
+            colour = "black"
+        self._window.draw_line(Line(self._bottomleft, self._bottomright), colour)
         
     def draw_move(self, to_cell, undo=False):
         if not undo:
