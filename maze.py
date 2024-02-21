@@ -45,7 +45,7 @@ class Maze:
 
     def _animate(self):
         self.window.redraw()
-        time.sleep(0.01)
+        time.sleep(0.005)
 
     def _break_entrance_and_exit(self):
         if len(self._cells) > 0:
@@ -107,24 +107,44 @@ class Maze:
             return True
         if current_cell.has_top_wall is False:
             if i-1 >= 0:
-                if self._check_direction(current_cell, i-1, j):
-                    return True
+                up_cell = self._cells[i-1][j]
+                if up_cell.visited == False:
+                    current_cell.draw_move(up_cell)
+                    if self._solve_r(i-1, j):
+                        return True
+                    else:
+                        current_cell.draw_move(up_cell, True)
         if current_cell.has_left_wall is False:
             if j-1 >= 0:
-                if self._check_direction(current_cell, i, j-1):
-                    return True
+                left_cell = self._cells[i][j-1]
+                if left_cell.visited == False:
+                    current_cell.draw_move(left_cell)
+                    if self._solve_r(i, j-1):
+                        return True
+                    else:
+                        current_cell.draw_move(left_cell, True)
         if current_cell.has_right_wall is False:
             if j+1 < self.num_rows:
-                if self._check_direction(current_cell, i, j+1):
-                    return True
+                right_cell = self._cells[i][j+1]
+                if right_cell.visited == False:
+                    current_cell.draw_move(right_cell)
+                    if self._solve_r(i, j+1):
+                        return True
+                    else:
+                        current_cell.draw_move(right_cell, True)
         if current_cell.has_bottom_wall is False:
             if i+1 < self.num_cols:
-                if self._check_direction(current_cell, i+1, j):
-                    return True
+                down_cell = self._cells[i+1][j]
+                if down_cell.visited == False:
+                    current_cell.draw_move(down_cell)
+                    if self._solve_r(i+1, j):
+                        return True
+                    else:
+                        current_cell.draw_move(down_cell, True)
         return False
 
                 
-
+"""
     def _check_direction(self, current_cell, i, j):
         next_cell = self._cells[i][j]
         if next_cell.visited == False:
@@ -133,4 +153,4 @@ class Maze:
                 return True
             else:
                 current_cell.draw_move(next_cell, True)
-                return False
+                return False"""
