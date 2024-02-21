@@ -7,6 +7,7 @@ class Window:
         self.__root.geometry(f"{width_val}x{height_val}")
         self.canvas = Canvas(self.__root)
         self.canvas.pack(fill=BOTH, expand=1)
+        self.canvas.configure(background='#d9d9d9')
         self.running = False
         self.__root.protocol("WM_DELETE_WINDOW", self.close)
 
