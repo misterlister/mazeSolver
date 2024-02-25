@@ -1,5 +1,5 @@
 from graphics import Point
-from cell import Cell, background_colour
+from cell import Cell
 import time
 import random
 
@@ -27,7 +27,8 @@ class Maze:
         if seed is not None:
             random.seed(seed)
         self._cells = []
-        self._create_cells()
+        self.__drawn = False
+        
     
     def _create_cells(self):
         for i in range (self.num_rows):
@@ -45,7 +46,7 @@ class Maze:
 
     def _animate(self):
         self.window.redraw()
-        time.sleep(0.005)
+        time.sleep(0.0005)
 
     def _break_entrance_and_exit(self):
         if len(self._cells) > 0:
@@ -97,7 +98,10 @@ class Maze:
                 self._cells[i][j].visited = False
 
     def solve(self):
-        return self._solve_r(0,0)
+        if self.__drawn:
+            return self._solve_r(0,0)
+        else:
+            pass
     
     def _solve_r(self, i, j):
         current_cell = self._cells[i][j]
@@ -142,15 +146,15 @@ class Maze:
                     else:
                         current_cell.draw_move(down_cell, True)
         return False
+    
+    def clear(self):
+        self.__drawn = False
+        pass
 
-                
-"""
-    def _check_direction(self, current_cell, i, j):
-        next_cell = self._cells[i][j]
-        if next_cell.visited == False:
-            current_cell.draw_move(next_cell)
-            if self._solve_r(i, j):
-                return True
-            else:
-                current_cell.draw_move(next_cell, True)
-                return False"""
+    def draw(self):
+        self.clear()
+        self._create_cells()
+        self._break_entrance_and_exit()
+        self._break_walls_r(0,0)
+        self._reset_cells_visited()
+        self.__drawn = True

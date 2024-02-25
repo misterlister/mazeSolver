@@ -1,14 +1,17 @@
 from tkinter import BOTH, Canvas
 
+bg_col = '#d9d9d9'
+
 class Window:
     def __init__(self, width_val, height_val, root) -> None:
         self.__root = root
         self.__root.title("Maze Solver")
         self.__root.geometry(f"{width_val}x{height_val}")
+        self.__root.configure(background=bg_col)
         self.canvas = Canvas(self.__root)
         self.canvas.pack(fill=BOTH, expand=1)
-        self.canvas.configure(background='#d9d9d9')
-        self.running = False
+        self.canvas.configure(background=bg_col)
+        self.running = True
         self.__root.protocol("WM_DELETE_WINDOW", self.close)
 
     def redraw(self):
@@ -16,7 +19,7 @@ class Window:
         self.__root.update()
 
     def wait_for_close(self):
-        self.running = True
+        #self.running = True
         while self.running == True:
             self.redraw()
         

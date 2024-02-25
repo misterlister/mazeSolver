@@ -1,6 +1,4 @@
-from graphics import Point, Line
-
-background_colour = "#d9d9d9"
+from graphics import Point, Line, bg_col
 
 class Cell:
     def __init__(self, p1, p2, window = None) -> None:
@@ -18,19 +16,19 @@ class Cell:
 
     
     def draw(self):
-        colour = background_colour
+        colour = bg_col
         if self.has_top_wall:
             colour = "black"
         self._window.draw_line(Line(self._topleft, self._topright), colour)
-        colour = background_colour
+        colour = bg_col
         if self.has_left_wall:
             colour = "black"
         self._window.draw_line(Line(self._topleft, self._bottomleft), colour)
-        colour = background_colour
+        colour = bg_col
         if self.has_right_wall:
             colour = "black"
         self._window.draw_line(Line(self._topright, self._bottomright), colour)
-        colour = background_colour
+        colour = bg_col
         if self.has_bottom_wall:
             colour = "black"
         self._window.draw_line(Line(self._bottomleft, self._bottomright), colour)
