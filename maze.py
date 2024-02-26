@@ -7,6 +7,7 @@ from controls import btn_pos_1, btn_spacing, height_label, width_label
 
 cell_size = 25
 sleep_time = 0.005
+entry_label_spacing = 10
 
 
 class Maze:
@@ -36,7 +37,6 @@ class Maze:
         self.__drawn = False
         self.current_height = Label(self.__root, text=height_label + "0", fg="black", background=bg_col, font=('Arial', 18, 'bold'))
         self.current_height.place(x=btn_pos_1, y=btn_spacing * 13)
-
         self.current_width = Label(self.__root, text= width_label + "0", fg="black", background=bg_col, font=('Arial', 18, 'bold'))
         self.current_width.place(x=btn_pos_1, y=btn_spacing * 15)
         
@@ -163,6 +163,8 @@ class Maze:
         self.window.canvas.create_rectangle(0, 0, divider-cell_size, window_height, fill=bg_col, outline=bg_col)
         self.current_height.destroy()
         self.current_width.destroy()
+        self.start_label.destroy()
+        self.end_label.destroy()
         self.__init__(self.window, self.__root)
 
     def draw(self):
@@ -173,4 +175,8 @@ class Maze:
             self._break_entrance_and_exit()
             self._break_walls_r(self.num_rows-1,self.num_cols-1)
             self._reset_cells_visited()
+            self.start_label = Label(self.__root, text="Start", fg="blue", background=bg_col, font=('Arial', 12))
+            self.start_label.place(x=self.x1 - entry_label_spacing, y=self.y1 - cell_size)
+            self.end_label = Label(self.__root, text="End", fg="green", background=bg_col, font=('Arial', 12))
+            self.end_label.place(x=self.x1+(cell_size*(self.num_cols-1)), y=self.y1+(cell_size*self.num_rows))
             self.__drawn = True
