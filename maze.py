@@ -6,6 +6,7 @@ from tkinter import Label
 from controls import btn_pos_1, btn_spacing, height_label, width_label
 
 cell_size = 25
+sleep_time = 0.005
 
 
 class Maze:
@@ -13,8 +14,8 @@ class Maze:
             self,
             window,
             root,
-            x1 = cell_size,
-            y1 = cell_size,
+            x1 = cell_size*2,
+            y1 = cell_size*2,
             num_rows = 0,
             num_cols = 0,
             cell_size_x = cell_size,
@@ -33,10 +34,10 @@ class Maze:
             random.seed(seed)
         self._cells = []
         self.__drawn = False
-        self.current_height = Label(self.__root, text=height_label + "0", fg="black", background=bg_col, font=('Arial', 22, 'bold'))
+        self.current_height = Label(self.__root, text=height_label + "0", fg="black", background=bg_col, font=('Arial', 18, 'bold'))
         self.current_height.place(x=btn_pos_1, y=btn_spacing * 13)
 
-        self.current_width = Label(self.__root, text= width_label + "0", fg="black", background=bg_col, font=('Arial', 22, 'bold'))
+        self.current_width = Label(self.__root, text= width_label + "0", fg="black", background=bg_col, font=('Arial', 18, 'bold'))
         self.current_width.place(x=btn_pos_1, y=btn_spacing * 15)
         
     
@@ -56,7 +57,7 @@ class Maze:
 
     def _animate(self):
         self.window.redraw()
-        time.sleep(0.0005)
+        time.sleep(sleep_time)
 
     def _break_entrance_and_exit(self):
         if len(self._cells) > 0:
@@ -118,6 +119,7 @@ class Maze:
         self._animate()
         current_cell.visited = True
         if i == (self.num_rows-1) and j == (self.num_cols-1):
+            print(f"found! i:{i}, j:{j}")
             return True
         if current_cell.has_top_wall is False:
             if i-1 >= 0:
@@ -138,7 +140,7 @@ class Maze:
                     else:
                         current_cell.draw_move(left_cell, True)
         if current_cell.has_right_wall is False:
-            if j+1 < self.num_rows:
+            if j+1 < self.num_cols:
                 right_cell = self._cells[i][j+1]
                 if right_cell.visited == False:
                     current_cell.draw_move(right_cell)
@@ -147,7 +149,7 @@ class Maze:
                     else:
                         current_cell.draw_move(right_cell, True)
         if current_cell.has_bottom_wall is False:
-            if i+1 < self.num_cols:
+            if i+1 < self.num_rows:
                 down_cell = self._cells[i+1][j]
                 if down_cell.visited == False:
                     current_cell.draw_move(down_cell)
