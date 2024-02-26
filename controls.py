@@ -1,15 +1,21 @@
 from tkinter import Button, Label
 from graphics import bg_col, divider, window_width
 
+# Colours used for control buttons
 button_col = '#add8e6'
 highlight_col = '#8bb6c4'
-height_label = "Maze Height: "
-width_label = "Maze Width: "
 
+# Spacing between each button
 btn_spacing = 45
+
+# Positions of the control buttons
 btn_pos_1 = int(((window_width - divider) * (1/4)) + divider)
 btn_pos_2 = int(((window_width - divider) * (2/4)) + divider)
 btn_pos_mid = int(((window_width - divider) * (1/3)) + divider)
+
+# Labels for the currently selected maze dimensions
+height_label = "Maze Height: "
+width_label = "Maze Width: "
 
 
 

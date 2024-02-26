@@ -5,8 +5,13 @@ import random
 from tkinter import Label
 from controls import btn_pos_1, btn_spacing, height_label, width_label
 
+# Determines the size of each maze cell
 cell_size = 25
+
+# Determines the amount of wait time between each creation operation, allowing for user visualization
 sleep_time = 0.005
+
+# Determines the spacing of the entry label from the entrance
 entry_label_spacing = 10
 
 

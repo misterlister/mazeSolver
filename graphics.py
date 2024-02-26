@@ -1,8 +1,13 @@
 from tkinter import BOTH, Canvas
 
+# Colour used for the background of the window
 bg_col = '#d9d9d9'
+
+# Dimensions for the application window
 window_width = 1200
 window_height = 900
+
+# X-position of the divider between maze window and control window
 divider = window_width * (3/4)
 
 class Window:
