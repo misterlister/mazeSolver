@@ -1,4 +1,4 @@
-from graphics import Window
+from graphics import Window, window_width, window_height
 from maze import Maze
 from controls import Controls
 from tkinter import Tk
@@ -8,10 +8,10 @@ if __name__ == "__main__":
     maze_width = None
     maze_height = None
     root = Tk()
-    window = Window(1200, 900, root)
+    window = Window(window_width, window_height, root)
     maze = Maze(
-            5,
-            5,
+            10,
+            10,
             5,
             5,
             25,
@@ -19,7 +19,4 @@ if __name__ == "__main__":
             window
             )
     controls = Controls(window, maze, root)
-
-    while window.running:
-        print (maze.num_cols)
-        window.redraw()
+    window.wait_for_close()

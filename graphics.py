@@ -1,6 +1,9 @@
 from tkinter import BOTH, Canvas
 
 bg_col = '#d9d9d9'
+window_width = 1200
+window_height = 900
+divider = window_width * (3/4)
 
 class Window:
     def __init__(self, width_val, height_val, root) -> None:
@@ -11,6 +14,7 @@ class Window:
         self.canvas = Canvas(self.__root)
         self.canvas.pack(fill=BOTH, expand=1)
         self.canvas.configure(background=bg_col)
+        self.dividing_line()
         self.running = True
         self.__root.protocol("WM_DELETE_WINDOW", self.close)
 
@@ -19,7 +23,7 @@ class Window:
         self.__root.update()
 
     def wait_for_close(self):
-        #self.running = True
+        self.running = True
         while self.running == True:
             self.redraw()
         
@@ -28,6 +32,12 @@ class Window:
 
     def draw_line(self, line, fill_colour = "black"):
         line.draw(self.canvas, fill_colour)
+
+    def dividing_line(self):
+        p1 = Point(divider, 0)
+        p2 = Point(divider, window_height)
+        dividing_line = Line(p1, p2)
+        self.draw_line(dividing_line)
 
 
 class Point:
@@ -45,3 +55,4 @@ class Line:
             self.p1.x, self.p1.y, self.p2.x, self.p2.y, fill=colour, width=2
         )
         canvas.pack()
+
