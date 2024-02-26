@@ -119,7 +119,6 @@ class Maze:
         self._animate()
         current_cell.visited = True
         if i == (self.num_rows-1) and j == (self.num_cols-1):
-            print(f"found! i:{i}, j:{j}")
             return True
         if current_cell.has_top_wall is False:
             if i-1 >= 0:
@@ -172,6 +171,6 @@ class Maze:
         if self.num_cols > 0 and self.num_rows > 0:
             self._create_cells()
             self._break_entrance_and_exit()
-            self._break_walls_r(0,0)
+            self._break_walls_r(self.num_rows-1,self.num_cols-1)
             self._reset_cells_visited()
             self.__drawn = True
