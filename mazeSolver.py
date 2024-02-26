@@ -12,8 +12,8 @@ if __name__ == "__main__":
     maze = Maze(
             10,
             10,
-            5,
-            5,
+            0,
+            0,
             25,
             25,
             window
