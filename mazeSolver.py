@@ -9,14 +9,6 @@ if __name__ == "__main__":
     maze_height = None
     root = Tk()
     window = Window(window_width, window_height, root)
-    maze = Maze(
-            10,
-            10,
-            0,
-            0,
-            25,
-            25,
-            window
-            )
+    maze = Maze(window, root)
     controls = Controls(window, maze, root)
     window.wait_for_close()

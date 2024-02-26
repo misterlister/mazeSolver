@@ -2,14 +2,15 @@ from tkinter import Button, Label
 from graphics import bg_col, divider, window_width
 
 button_col = '#add8e6'
+height_label = "Maze Height: "
+width_label = "Maze Width: "
 
 btn_spacing = 40
 btn_pos_1 = int(((window_width - divider) * (1/4)) + divider)
 btn_pos_2 = int(((window_width - divider) * (2/4)) + divider)
 btn_pos_mid = int(((window_width - divider) * (1/3)) + divider)
 
-maze_height = "Maze Height: "
-maze_width = "Maze Width: "
+
 
 class Controls:
     def __init__(self, window, maze, root) -> None:
@@ -53,20 +54,15 @@ class Controls:
         self.solve_btn.place(x=btn_pos_mid, y=btn_spacing * 10)
         self.clear_btn.place(x=btn_pos_mid, y=btn_spacing * 11)
 
-        self.current_height = Label(root, text=maze_height + "0", fg="black", background=bg_col, font=('Arial', 22, 'bold'))
-        self.current_height.place(x=btn_pos_1, y=btn_spacing * 13)
-
-        self.current_width = Label(root, text= maze_width + "0", fg="black", background=bg_col, font=('Arial', 22, 'bold'))
-        self.current_width.place(x=btn_pos_1, y=btn_spacing * 15)
+        
         
     def maze_height(self, size):
         self.maze.num_rows = size
-        self.current_height.config(text=maze_height + str(size))
+        self.maze.current_height.config(text=height_label + str(size))
         
-
     def maze_width(self, size):
         self.maze.num_cols = size
-        self.current_width.config(text=maze_width + str(size))
+        self.maze.current_width.config(text=width_label + str(size))
 
     def solve(self):
         self.maze.solve()

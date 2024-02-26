@@ -1,33 +1,43 @@
-from graphics import Point
+from graphics import Point, bg_col, window_height, divider
 from cell import Cell
 import time
 import random
+from tkinter import Label
+from controls import btn_pos_1, btn_spacing, height_label, width_label
 
+cell_size = 25
 
 
 class Maze:
     def __init__(
             self,
-            x1,
-            y1,
-            num_rows,
-            num_cols,
-            cell_size_x,
-            cell_size_y,
-            window = None,
+            window,
+            root,
+            x1 = cell_size,
+            y1 = cell_size,
+            num_rows = 0,
+            num_cols = 0,
+            cell_size_x = cell_size,
+            cell_size_y = cell_size,
             seed = None
                  ) -> None:
+        self.window = window
+        self.__root = root
         self.x1 = x1
         self.y1 = y1
         self.num_rows = num_rows
         self.num_cols = num_cols
         self.cell_size_x = cell_size_x
         self.cell_size_y = cell_size_y
-        self.window = window
         if seed is not None:
             random.seed(seed)
         self._cells = []
         self.__drawn = False
+        self.current_height = Label(self.__root, text=height_label + "0", fg="black", background=bg_col, font=('Arial', 22, 'bold'))
+        self.current_height.place(x=btn_pos_1, y=btn_spacing * 13)
+
+        self.current_width = Label(self.__root, text= width_label + "0", fg="black", background=bg_col, font=('Arial', 22, 'bold'))
+        self.current_width.place(x=btn_pos_1, y=btn_spacing * 15)
         
     
     def _create_cells(self):
@@ -149,12 +159,17 @@ class Maze:
     
     def clear(self):
         self.__drawn = False
-        pass
+        self.window.canvas.create_rectangle(0, 0, divider-cell_size, window_height, fill=bg_col, outline=bg_col)
+        self.current_height.destroy()
+        self.current_width.destroy()
+        self.__init__(self.window, self.__root)
 
     def draw(self):
-        self.clear()
-        self._create_cells()
-        self._break_entrance_and_exit()
-        self._break_walls_r(0,0)
-        self._reset_cells_visited()
-        self.__drawn = True
+        if self.__drawn:
+            return
+        if self.num_cols > 0 and self.num_rows > 0:
+            self._create_cells()
+            self._break_entrance_and_exit()
+            self._break_walls_r(0,0)
+            self._reset_cells_visited()
+            self.__drawn = True
