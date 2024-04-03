@@ -1,5 +1,7 @@
 # mazeSolver
 
+![MazeSolver-Demo](demo/MazeSolver-Demo.gif)
+
 This program allows the user to generate a randomized maze of chosen dimensions.
 
 Select the desired height and width of the maze, and then select "Draw Maze" in order to create it.
